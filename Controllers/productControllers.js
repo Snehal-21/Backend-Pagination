@@ -38,7 +38,6 @@ export const pagination=async(req,res)=>{
                 tatalpages:Math.ceil(count/limit),
                 currentpage:page
             });
-            // res.send(data)
         
     }
     catch(error){

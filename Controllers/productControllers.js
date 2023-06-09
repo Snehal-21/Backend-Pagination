@@ -75,24 +75,18 @@ export const color_Filter=async(req,res)=>{
 
 export const price_Filter=async(req,res)=>{
     try{
-        const { price}=req.body;
+        const { price } = req.body;
         if(!price) return res.send("Price is required!");
         // if(!max_price) return res.send("Price is required!");
 
        
         // const data=await Products.find({price}).exec();
         // console.log(data,"sfga");
-
-      const data=  Products.filter(({pro}) => pro.price<=price)
-        return res.send(data)
-        // console.log(data)
-        // for (var i=0;i<data.length;i++){
-        //     var current=data[i];
-        //     if(current.price >=500 && current.price <=500){
-        //          res.send(current)
-        //     }
-        // }
-        // res.send(current)
+        const productList=await Products.find({}).exec();
+      const data=await productList.filter(item => item.price <=price);
+      console.log(data,"data");
+        return res.send(data);
+      
         }
     catch(error){
         return res.send(error);

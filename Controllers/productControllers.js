@@ -65,7 +65,7 @@ export const color_Filter=async(req,res)=>{
         if(!products.length) {
              res.send("Products not found!");
         }else{
-            res.send(products[0])
+            res.send(products)
         }
 
     }catch(error){

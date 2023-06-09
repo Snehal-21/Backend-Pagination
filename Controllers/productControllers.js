@@ -83,8 +83,7 @@ export const price_Filter=async(req,res)=>{
         // const data=await Products.find({price}).exec();
         // console.log(data,"sfga");
         const productList=await Products.find({}).exec();
-      const data=await productList.filter(item => item.price <=price);
-      console.log(data,"data");
+      const data=productList.filter(item => item.price <=price);
         return res.send(data);
       
         }

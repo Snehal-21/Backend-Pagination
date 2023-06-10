@@ -56,38 +56,58 @@ export const pagination = async (req, res) => {
 }
 
 
-export const color_Filter=async(req,res)=>{
-    try{
-        const { color } =req.body;
-        if(!color) return res.send("Color is required!");
-        const products=await Products.find({color}).exec();
-        console.log(products,"kjsbckjs")
-        if(!products.length) {
-             res.send("Products not found!");
-        }else{
+export const color_Filter = async (req, res) => {
+    try {
+        const { color } = req.body;
+        if (!color) return res.send("Color is required!");
+        const products = await Products.find({ color }).exec();
+        console.log(products, "kjsbckjs")
+        if (!products.length) {
+            res.send("Products not found!");
+        } else {
             res.send(products)
         }
 
-    }catch(error){
+    } catch (error) {
         return res.send(error);
     }
 }
 
-export const price_Filter=async(req,res)=>{
-    try{
+export const price_Filter = async (req, res) => {
+    try {
         const { price } = req.body;
-        if(!price) return res.send("Price is required!");
-        // if(!max_price) return res.send("Price is required!");
-
-       
-        // const data=await Products.find({price}).exec();
-        // console.log(data,"sfga");
-        const productList=await Products.find({}).exec();
-      const data=productList.filter(item => item.price <=price);
+        if (!price) return res.send("Price is required!");
+        const productList = await Products.find({}).exec();
+        const data = productList.filter(item => item.price <= price);
         return res.send(data);
-      
-        }
-    catch(error){
+
+    }
+    catch (error) {
         return res.send(error);
+    }
+}
+
+export const filter = async (req, res) => {
+    try {
+        const { color, price } = req.body;
+        if(color){
+        if (!color) return res.send("Color is required!");
+        const products = await Products.find({ color }).exec();
+        console.log(products, "kjsbckjs")
+        if (!products.length) {
+            res.send("Products not found!");
+        } else if(products.length){
+            res.send(products)
+        }
+    }
+    if(price){
+       if (!price) return res.send("Price is required!");
+        const productList = await Products.find({}).exec();
+        const data = productList.filter(item => item.price <= price);
+        return res.send(data);
+    }
+
+    } catch (error) {
+        return res.send(error)
     }
 }
